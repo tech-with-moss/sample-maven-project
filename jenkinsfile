@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git Clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/ojoopeyemi74/sample-maven-project.git'
+            }
+        }
+        stage('Maven test') {
+            steps {
+               sh  'mvn test'
+            }
+        }
+        stage('Maven Build') {
+            steps {
+               sh  'mvn package'
+            }
+        }
+        stage('Maven deploy') {
+            steps {
+               echo "Deploying the war file to the server"
+            }
+        }
+    }
+}
